@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firebase Admin Panel</title>
+<style>
+    /* Global */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f7f6;
+        color: #333;
+        display: flex;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+        width: 240px;
+        background: #2e7d32;
+        height: 100vh;
+        padding: 20px;
+        color: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .sidebar h2 {
+        margin-bottom: 30px;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+    }
+    .sidebar a {
+        display: block;
+        text-decoration: none;
+        color: #e8f5e9;
+        padding: 12px 15px;
+        border-radius: 6px;
+        margin: 6px 0;
+        transition: background 0.3s;
+        font-size: 15px;
+    }
+    .sidebar a:hover {
+        background: #256428;
+    }
+    .logout-btn {
+        background: #c62828;
+        text-align: center;
+        padding: 10px;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+    }
+    .logout-btn:hover { background: #b71c1c; }
+
+    /* Main Content */
+    .main {
+        margin-left: 240px;
+        padding: 20px;
+        flex: 1;
+    }
+    header {
+        background: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    header h1 {
+        color: #2e7d32;
+        font-size: 22px;
+    }
+
+    /* Table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+    }
+    th {
+        background: #2e7d32;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+    }
+    tr:nth-child(even) { background: #f9fff9; }
+
+    /* Buttons */
+    .btn {
+        padding: 6px 12px;
+        font-size: 13px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+    }
+    .edit-btn { background: #388e3c; color: white; }
+    .delete-btn { background: #c62828; color: white; }
+    .edit-btn:hover { background: #2e7d32; }
+    .delete-btn:hover { background: #b71c1c; }
+
+    /* Edit Form */
+    #editForm {
+        display: none;
+        background: white;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 3px 12px rgba(0,0,0,0.1);
+        max-width: 500px;
+    }
+    #editForm h3 {
+        margin-bottom: 15px;
+        color: #2e7d32;
+    }
+    #editForm input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    #editForm button { margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div>
+        <h2>Admin Panel</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Users</a>
+        <a href="#">Settings</a>
+    </div>
+    <div class="logout-btn" onclick="logout()">Logout</div>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+    <header>
+        <h1>Firebase Admin Dashboard</h1>
+        <span id="recordCount">Total Records: 0</span>
+    </header>
+
+    <!-- Edit Form -->
+    <div id="editForm">
+        <h3>Edit User</h3>
+        <input type="hidden" id="editId">
+        <input type="text" id="editFirstName" placeholder="First Name">
+        <input type="text" id="editLastName" placeholder="Last Name">
+        <input type="email" id="editEmail" placeholder="Email">
+        <input type="text" id="editPhone" placeholder="Phone">
+        <input type="text" id="editCountry" placeholder="Country">
+        <input type="text" id="editDeliveryMode" placeholder="Delivery Mode">
+        <input type="text" id="editEnglishLevel" placeholder="English Level">
+        <button class="btn edit-btn" onclick="saveEdit()">Save Changes</button>
+        <button class="btn delete-btn" onclick="cancelEdit()">Cancel</button>
+    </div>
+
+    <!-- Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>First</th>
+                <th>Last</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Country</th>
+                <th>Delivery</th>
+                <th>English</th>
+                <th>Last Modified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="data-table"></tbody>
+    </table>
+</div>
+
+<!-- Firebase v8 -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+    // Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyAVFtv11WlQR09biOXNkfQ7LgnENOM91oo",
+        authDomain: "responsivedb-cb72a.firebaseapp.com",
+        databaseURL: "https://responsivedb-cb72a-default-rtdb.firebaseio.com",
+        projectId: "responsivedb-cb72a",
+        storageBucket: "responsivedb-cb72a.firebasestorage.app",
+        messagingSenderId: "865110840242",
+        appId: "1:865110840242:web:5ae476d0c556d6b20fcaab",
+        measurementId: "G-NGQGG975M3"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const tableBody = document.getElementById("data-table");
+    const editForm = document.getElementById("editForm");
+    const recordCount = document.getElementById("recordCount");
+
+    // Load data
+    function loadData() {
+        db.ref("responsivedb").on("value", snapshot => {
+            tableBody.innerHTML = "";
+            let count = 0;
+            snapshot.forEach(child => {
+                count++;
+                const data = child.val();
+                const key = child.key;
+                const lastModified = data.lastModified ? new Date(data.lastModified).toLocaleString() : "-";
+                const row = `
+                    <tr>
+                        <td>${data.firstName || ""}</td>
+                        <td>${data.lastName || ""}</td>
+                        <td>${data.email || ""}</td>
+                        <td>${data.phone || ""}</td>
+                        <td>${data.country || ""}</td>
+                        <td>${data.deliveryMode || ""}</td>
+                        <td>${data.englishLevel || ""}</td>
+                        <td>${lastModified}</td>
+                        <td>
+                            <button class="btn edit-btn" onclick="editEntry('${key}')">Edit</button>
+                            <button class="btn delete-btn" onclick="deleteEntry('${key}')">Delete</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+            recordCount.textContent = `Total Records: ${count}`;
+        });
+    }
+    loadData();
+
+    // Edit entry
+    window.editEntry = function(id) {
+        db.ref("responsivedb/" + id).once("value").then(snapshot => {
+            const data = snapshot.val();
+            if (!data) return alert("No data found!");
+            document.getElementById("editId").value = id;
+            document.getElementById("editFirstName").value = data.firstName || "";
+            document.getElementById("editLastName").value = data.lastName || "";
+            document.getElementById("editEmail").value = data.email || "";
+            document.getElementById("editPhone").value = data.phone || "";
+            document.getElementById("editCountry").value = data.country || "";
+            document.getElementById("editDeliveryMode").value = data.deliveryMode || "";
+            document.getElementById("editEnglishLevel").value = data.englishLevel || "";
+            editForm.style.display = "block";
+        });
+    };
+
+    // Save changes
+    window.saveEdit = function() {
+        const id = document.getElementById("editId").value;
+        const updatedData = {
+            firstName: document.getElementById("editFirstName").value,
+            lastName: document.getElementById("editLastName").value,
+            email: document.getElementById("editEmail").value,
+            phone: document.getElementById("editPhone").value,
+            country: document.getElementById("editCountry").value,
+            deliveryMode: document.getElementById("editDeliveryMode").value,
+            englishLevel: document.getElementById("editEnglishLevel").value,
+            lastModified: Date.now()
+        };
+        db.ref("responsivedb/" + id).set(updatedData, (error) => {
+            if (!error) {
+                alert("Updated successfully!");
+                editForm.style.display = "none";
+                loadData();
+            }
+        });
+    };
+
+    // Cancel edit
+    window.cancelEdit = function() {
+        editForm.style.display = "none";
+    };
+
+    // Delete entry
+    window.deleteEntry = function(id) {
+        if (confirm("Are you sure you want to delete this entry?")) {
+            db.ref("responsivedb/" + id).remove(() => {
+                loadData();
+            });
+        }
+    };
+
+    // Logout function
+    function logout() {
+        // redirect to main/login page
+        window.location.href = "index.html"; 
+    }
+</script>
+
+</body>
+</html>

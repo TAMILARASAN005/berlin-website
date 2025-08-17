@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Enquiry Form</title>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Enquire now to download our Factsheet</h2>
+    <form id="form">
+      <input type="text" id="firstName" placeholder="First Name*" required>
+      <input type="text" id="lastName" placeholder="Last Name*" required>
+      <input type="email" id="email" placeholder="Email*" required>
+      <input type="text" id="phone" placeholder="Phone*" required>
+      <input type="text" id="country" placeholder="Country*" required>
+
+      <select id="deliveryMode" required>
+        <option value="">Delivery Mode*</option>
+        <option value="On-Campus">On-Campus</option>
+        <option value="Online">Online</option>
+        <option value="Hybrid">Hybrid</option>
+      </select>
+
+      <select id="englishLevel" required>
+        <option value="">Level of English*</option>
+        <option>Beginner</option>
+        <option>Intermediate</option>
+        <option>Advanced</option>
+      </select>
+
+      <label>
+        <input type="checkbox" id="consent" required>
+        I consent to receiving communications.
+      </label>
+
+      <button type="submit">SUBMIT</button>
+    </form>
+  </div>
+
+  <!-- Firebase script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // 🔹 Replace with your Firebase config
+      const firebaseConfig = {
+        apiKey: "AIzaSyAQjS5kGbOl3sUlY2PWBWUh4B03W_DiiUs",
+        authDomain: "responsive-376f1.firebaseapp.com",
+        databaseURL: "https://responsive-376f1-default-rtdb.firebaseio.com",
+        projectId: "responsive-376f1",
+        storageBucket: "responsive-376f1.firebasestorage.app",
+        messagingSenderId: "349251929222",
+        appId: "1:349251929222:web:526bfbaa2d5156f23fbd07",
+        measurementId: "G-906S6M70VS"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Handle form submit
+    const form = document.getElementById("form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        country: document.getElementById("country").value,
+        deliveryMode: document.getElementById("deliveryMode").value,
+        englishLevel: document.getElementById("englishLevel").value,
+        consent: document.getElementById("consent").checked
+      };
+
+      try {
+        await addDoc(collection(db, "responsive"), formData);
+        alert("Form submitted successfully!");
+        form.reset();
+      } catch (error) {
+        console.error("Error saving data: ", error);
+        alert("Something went wrong!");
+      }
+    });
+  </script>
+</body>
+</html>

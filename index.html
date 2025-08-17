@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSc IT Management - Enquiry Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <style>
+     html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Stops any sideways scroll */
+    position: relative;
+}
+
+
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f3f3f3;
+            color: rgb(65, 111, 210);
+            flex-wrap: wrap;
+        }
+        .logo-text-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-text-container img {
+            height: 40px;
+            width: auto;
+        }
+        .logo-text-container span {
+            font-size: 1.2rem;
+            font-weight: bold;
+            white-space: nowrap;
+            color: black;
+        }
+        .links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .links a {
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .links a:hover {
+            color: rgb(65, 123, 224);
+        }
+        .cta {
+            background: rgb(51, 188, 215);
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .cta:hover {
+            background: rgb(37, 106, 174);
+        }
+    /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh; /* full viewport height */
+    width: 100%;
+    background: url('college.jpeg') no-repeat center center;
+    background-size: cover; /* full background */
+    display: flex;
+    justify-content: flex-start; /* hero text left, form right */
+    align-items: center;
+    padding: 50px;
+    color: white;
+}
+
+/* Hero Text (Left) */
+.hero-text {
+    max-width: 600px;
+    z-index: 1; /* above background */
+}
+
+.hero-text h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.hero-text p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.hero-text img {
+    width: 150px;
+    height: auto;
+    margin: 15px 0;
+}
+
+/* Form Box (Right Floating) */
+.form-box {
+    width: 400px;
+    background: rgba(0,0,0,0.6); /* glass effect */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); /* Safari */
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+    margin-left: auto; /* float to right */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Form Elements */
+.form-box h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+/* Inputs and selects */
+.form-box input,
+.form-box select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+/* Checkbox */
+.form-box label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-box input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+    transform: scale(1.2);
+}
+
+/* Button */
+.form-box button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: #00c6ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-box button:hover {
+    background: #009ec9;
+}
+
+/* Small text inside form */
+.form-box small {
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+/* Responsive (Tablet / Mobile) */
+@media (max-width: 1200px) {  /* higher breakpoint for tablets */
+    .hero {
+        flex-direction: column; /* stack hero text and form */
+        justify-content: center;
+        height: auto; /* allow hero to shrink */
+        padding: 20px;
+    }
+
+    .form-box {
+        width: 100%;
+        max-width: 400px;
+        margin-left: 0;
+        margin-top: 20px; /* form below hero text */
+    }
+
+    .hero-text {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-text img {
+        width: 120px;
+    }
+}
+
+
+
+
+        /* About Programme Section */
+.about-programme {
+    padding: 50px 20px;
+    text-align: center;
+    background: white;
+}
+
+.about-programme h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #002f5f;
+}
+
+.programme-card {
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    overflow: hidden;
+}
+
+.programme-card h3 {
+    background: #2d9cdb;
+    color: white;
+    padding: 15px;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.programme-card p {
+    padding: 15px;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 1rem;
+    color:rgb(13, 96, 111);
+}
+
+.programme-details {
+    background: #f2f2f2;
+    padding: 15px;
+    border-bottom:8px solid #009ec9;
+}
+
+.programme-details p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: rgb(20, 60, 100);
+}
+
+.terms {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    color: #666;
+}
+/* Why BSBI Section */
+.why-bsbi {
+    background-color: #1b4d7a;
+    color: white;
+    padding: 50px 20px; /* Adds margin from left & right for the whole section */
+    text-align: center;
+}
+
+.why-bsbi h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0; /* No space between boxes */
+    width: 100%;
+    max-width: 1100px; /* Limit total width */
+    margin: 0 auto; /* Center the grid */
+    background-color: rgb(47, 149, 177); /* Optional to see boundary clearly */
+    object-fit: contain; /* shows full image, adds background if needed */
+
+
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 200px;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fills box, crops if needed */
+    display: block;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle; /* removes any stray whitespace in some browsers */
+}
+
+.grid-item.text {
+    padding: 15px;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.grid-item.red {
+    background-color: #e74c3c;
+}
+
+.grid-item.blue {
+    background-color: #3498db;
+}
+
+.grid-item.blue:hover {
+    background-color:pink;
+    color:black;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+.video-section {
+    text-align: center;
+    padding: 40px 20px 20px;
+    background-color: #fff;
+    margin-top: 0;
+}
+
+.watch-text {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #35516B;
+    font-weight: bold;
+}
+
+.video-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    width: 560px;   /* smaller width */
+    height: 315px;  /* smaller height (16:9 ratio) */
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    border: 4px solid #1b4d7a;
+}
+.profile{
+
+    background-color: rgb(55, 230, 230);
+    margin:0;
+    padding: 0;
+}
+
+    .slider-container {
+        max-width: 800px; /* Increased width */
+        height: 400px; /* Increased height */
+        margin: 50px auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .slide {
+        display: none;
+        position: relative;
+        height: 100%;
+    }
+
+    .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Show full image */
+    border-radius: 8px;
+    /* background-color: #dff6fb; Optional: fill any empty space */
+}
+
+
+    
+
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 15px;
+        color: white;
+        font-weight: bold;
+        font-size: 22px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        user-select: none;
+        z-index: 10;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .dots {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .dot {
+        height: 14px;
+        width: 14px;
+        margin: 0 5px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    
+    /* body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        
+    }  */
+     .about-section {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 20px;
+        background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e'); /* full width image */
+        background-size: cover; /* cover entire width */
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        color: #fff;
+    }
+
+    /* Overlay for text readability */
+    .about-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* dark overlay */
+        z-index: 1;
+    }
+
+    .about-content {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1200px; /* center content */
+        width: 100%;
+        gap: 30px;
+        position: relative; /* above overlay */
+        z-index: 2;
+        margin: 0 auto;
+    }
+
+    .about-text, .about-video {
+        flex: 1 1 500px;
+        min-width: 300px;
+    }
+
+    .about-text h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .about-text p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .about-video iframe {
+        width: 100%;
+        height: 340px;
+        border: 6px solid #5f95f1;
+        border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .about-content {
+            flex-direction: column;
+        }
+
+        .about-video iframe {
+            height: 250px;
+        }
+    }
+ 
+  /* Section heading */
+  /* Remove space between sections globally */
+section {
+    margin-top: 0;
+}
+/* Remove extra space above section */
+.profile {
+    margin: 0;
+    padding: 0;
+}
+
+.profile h2 {
+    margin-top: 0;
+    padding-top: 20px; /* Adjust as needed */
+}
+
+h2 {
+    text-align: center;
+    font-size: 32px;
+    margin: 40px 0 20px 0; /* Less space above and below */
+    color: #1b4d7a;
+}
+
+/* Slider container */
+.slider-container {
+    max-width: 1000px;
+    height: 500px; /* Reduced height */
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    padding: 0; /* Remove extra padding */
+    background: none; /* Remove background */
+    border-radius: 0; /* Remove border radius */
+    background: transparent !important;
+}
+
+/* Slides */
+.slide {
+    width: 100%;
+    height: 100%;
+
+}
+
+.slide img {
+    width: 1000px;
+    height:100%;
+    object-fit:contain;
+    object-position: center; /* Keep center visible */
+    display: block; /* Remove default inline gap */ /* Maintain image ratio */
+}
+
+/* Prev/Next buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    user-select: none;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.next {
+    right: 10px;
+}
+
+.prev {
+    left: 10px;
+}
+
+/* Dots container */
+.dots {
+    text-align: center;
+    margin-top: 20px; /* Reduced space */
+}
+
+/* Individual dot */
+.dot {
+    cursor: pointer;
+    height: 16px; /* Slightly smaller dots */
+    width: 16px;
+    margin: 0 8px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+.dot:hover {
+    background-color: #555;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+}
+.section-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-image: url('assests/bc.jpg'); /* ✅ Fixed spelling */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin: 0;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  color: #fff; /* Bright text */
+  z-index: 1;
+}
+
+/* Black shadow overlay over the image */
+.section-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity for darkness */
+  z-index: 0; /* Behind content */
+}
+
+/* Ensure text & slideshow stay above overlay */
+.section-container > * {
+  position: relative;
+  z-index: 1;
+}
+            .text-content {
+              flex: 1 1 400px;
+              max-width: 600px;
+            }
+            .text-content h2 {
+              font-size: 2rem;
+              margin-bottom: 1rem;
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+            }
+            .text-content p {
+              font-size: 1.1rem;
+              line-height: 1.6;
+            }
+            .slideshow-container {
+              position: relative;
+              width: 320px;
+              height: 220px;
+              border: 10px solid #63a4ff;
+              border-radius: 6px;
+              overflow: hidden;
+              box-shadow: 0 0 20px #63a4ff99;
+              background: #1e1e1e;
+              flex-shrink: 0;
+            }
+            .slideshow-container img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              opacity: 0;
+              position: absolute;
+              top: 0; left: 0;
+              transition: opacity 0.8s ease-in-out;
+            }
+            .slideshow-container img.active {
+              opacity: 1;
+              position: relative;
+            }
+            .dot-container {
+              position: absolute;
+              bottom: 8px;
+              width: 100%;
+              text-align: center;
+              user-select: none;
+            }
+            .dot {
+              cursor: pointer;
+              height: 11px;
+              width: 11px;
+              margin: 0 5px;
+              background-color: #9abcf9;
+              border-radius: 50%;
+              display: inline-block;
+              transition: background-color 0.3s ease;
+            }
+            .dot.active {
+              background-color: #ffffff;
+              box-shadow: 0 0 6px #63a4ff;
+            }
+         
+
+            /* Responsive */
+            @media (max-width: 720px) {
+             .section-container {
+              flex-direction: column;
+              align-items: center;
+    gap: 1.5rem; /* Smaller gap on mobile */
+  }
+}
+.testimonial-section {
+  background: #946bb3; /* Purple background like your screenshot */
+  text-align: center;
+  padding: 3rem 1rem;
+  color: white;
+}
+
+.testimonial-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-section p {
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+
+.testimonial-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.card {
+  background-color: #234a70; /* Dark blue background */
+  padding: 1rem;
+  border-radius: 4px;
+  width: 340px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.card iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.card p {
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+/* Special Offers Section */
+.special-offers {
+  background-color: #f39c5f; /* Orange */
+  color: #1a2f55; /* Dark blue text */
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.special-offers h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.special-offers p {
+  font-size: 1.2rem;
+}
+
+.special-offers a {
+  color: #1a2f55;
+  text-decoration: underline;
+}
+
+/* Common footer styles for all pages */
+.site-footer {
+    background-color: #1a3c68;  /* Deep blue background */
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    position: relative; /* default for normal pages */
+    z-index: 10;
+}
+
+.site-footer .footer-logo img {
+    height: auto;                 /* keep proportions */
+    width: auto;                   /* no distortion */
+    max-height: 80px;              /* slightly larger for clarity */
+    image-rendering: -webkit-optimize-contrast; /* improve sharpness in Chrome */
+    image-rendering: crisp-edges;  /* for other browsers */
+    display: block;
+    margin: 0 auto 10px auto;
+    background-color:white;
+}
+
+
+/* Footer text */
+.site-footer .footer-text {
+    margin-bottom: 10px;
+}
+
+/* Footer links */
+.site-footer .footer-links a {
+    color: #fff !important;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 0 5px;
+}
+
+.site-footer .footer-links a:hover {
+    color: #ffcc00 !important;
+    text-decoration: none;
+}
+
+/* Admin page special case: stick footer at bottom */
+body.admin-page .site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Prevent content from hiding behind fixed footer */
+body.admin-page main,
+body.admin-page .content {
+    padding-bottom: 80px;
+}
+
+
+
+.why-choose {
+  text-align: center;
+  background-color:rgb(90, 201, 239);
+  padding: 50px 20px;
+}
+
+.swiper {
+  padding: 20px 0;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background:#35516B;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 300px;
+}
+
+.icon img {
+  width: 70px;
+  margin-bottom: 15px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000;
+}
+
+
+
+ </style>
+        
+
+</head>
+<body>
+
+    <nav>
+        <div class="logo-text-container">
+            <img src="logo.png" alt="BSBI Logo">
+            <span>Berlin School of Business & Innovation</span>
+        </div>
+        <div class="links">
+            <a href="#about-nav">Programme</a>
+            <a href="#">Why Choose BSBI?</a>
+            <a href="#why-nav">Why Study in Germany?</a>
+            <a href="#our-nav">Our Campus</a>
+            <a href="#testimonials-nav">Testimonials</a>
+        </div>
+        <a class="cta" href="#">Enquire Now</a>
+    </nav>
+
+   
+    <section class="hero">
+        <!-- Left Hero Text -->
+        <div class="hero-text">
+            <h1>Study MSc Information Technology Management</h1>
+            <p>All business leaders start somewhere.<br>Start your journey with BSBI</p>
+            <img src="uca.png" alt="UCA Logo">
+            <p>'Outstanding Organization Award'<br>Education 2.0 Conference, Dubai 2024</p>
+        </div>
+    
+        <!-- Right Form (inside hero) -->
+        <div class="form-box">
+            <h2>Enquire now to download our Factsheet</h2>
+            <form id="form">
+                <input type="text" id="firstName" placeholder="First Name*" required>
+                <input type="text" id="lastName" placeholder="Last Name*" required>
+                <input type="email" id="email" placeholder="Email*" required>
+                <input type="text" id="phone" placeholder="Phone*" required>
+                <input type="text" id="country" placeholder="Country*" required>
+    
+                <select id="deliveryMode" required>
+                    <option value="">Delivery Mode*</option>
+                    <option value="On-Campus">On-Campus</option>
+                    <option value="Online">Online</option>
+                    <option value="Hybrid">Hybrid</option>
+                </select>
+    
+                <select id="englishLevel" required>
+                    <option value="">Level of English*</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+    
+                <label>
+                    <input type="checkbox" id="consent" required>
+                    I consent to receiving communications.
+                </label>
+    
+                <button type="submit">SUBMIT</button>
+            </form>
+        </div>
+    </section>
+    
+    <section class="about-programme" id="about-nav">
+        <h2>ABOUT THE PROGRAMME</h2>
+    
+        <div class="programme-card">
+            <h3>MSc Information Technology Management</h3>
+            <p>
+                As a student on this course, you will get the opportunity to develop your knowledge of a range of core 
+                business areas and IT management skills. This will underpin the extensive development of your academic, 
+                theoretical and practical knowledge of the data science and high-tech industry.
+            </p>
+    
+            <div class="programme-details">
+                <p><strong>Campus:</strong> Berlin</p>
+                <p><strong>Duration:</strong> 18 months</p>
+                <p><strong>Fee:</strong> €13,250 (International students) | €8,450 (EU students)</p>
+                <p><strong>Intakes:</strong> May and October</p>
+            </div>
+        </div>
+    
+        <p class="terms">*Terms and Conditions Apply</p>
+    </section>
+    <section class="why-bsbi" id="why-nav">
+        <h2>WHY STUDY AT BSBI BERLIN?</h2>
+        <div class="grid-container">
+            
+            <div class="grid-item">
+                <img src="berlink_skyline.jpg" alt="Berlin Skyline">
+            </div>
+    
+            <div class="grid-item text blue">
+                <p>Germany has the largest economy in Europe and the 4th largest worldwide</p>
+            </div>
+    
+            <div class="grid-item">
+                <img src="berlin_street.jpg" alt="Berlin Street">
+            </div>
+    
+            <div class="grid-item text blue">
+                <p>Top 10 of QS Best Student Cities 2024 ranking, making it a popular study-abroad destination</p>
+            </div>
+    
+            <div class="grid-item text blue">
+                <p>Germany is home to 16 national parks, 104 nature parks, and 15 biosphere reserves, offering diverse and stunning natural landscapes for students to explore</p>
+            </div>
+    
+            <div class="grid-item">
+                <img src="berlin_museum.jpg" alt="Berlin Museum Island">
+            </div>
+    
+            <div class="grid-item text blue">
+                <p>Graduates in Berlin have good job prospects with an unemployment rate of 5.7%, which is expected to decrease by 2024</p>
+            </div>
+    
+            <div class="grid-item">
+                <img src="student_berlin.jpg" alt="Student in Berlin">
+            </div>
+    
+        </div>
+    </section>
+    <section class="video-section">
+        <div class="intro-text">
+            <p>Information Technology skills are universally valued and essential for a successful career in any modern organisation.</p>
+            <p>At BSBI we aim to prepare students for the very best job upon graduation.</p>
+        </div>
+    
+        <p class="watch-text">WATCH TO LEARN MORE</p>
+        <div class="video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/YQyOQslsp_I"
+                title="Student Experience" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        
+    
+    </section>
+  <section class="profile"> 
+<h2>CLASS PROFILE</h2>
+
+<div class="slider-container">
+    <div class="slide">
+        <img src="slide.jpg" alt="Slide 1">
+    </div>
+
+    <div class="slide">
+        <img src="slide2.jpg" alt="Slide 2">
+    </div>
+
+    <div class="slide">
+        <img src="slide3.jpg" alt="Slide 3">
+    </div>
+
+    <div class="slide">
+        <img src="slide4.jpg" alt="Slide 4">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<div class="dots">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+</div>
+</section> 
+    <div class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>ABOUT BSBI</h2>
+                <p>
+                    At BSBI, we are dedicated to training students to effectively shape the future
+                    and become tomorrow’s leaders in an ever-changing business world. With enterprise
+                    and success at its core, BSBI offers industry-relevant programmes which focus on
+                    developing the practical business skills needed to ensure your professional success.
+                    Located in the heart of Berlin, we are a truly international business school that
+                    provides academic excellence.
+                </p>
+            </div>
+            <div class="about-video">
+                <iframe src="https://www.youtube.com/embed/YQyOQslsp_I" title="BSBI Video" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <section class="why-choose">
+        <h2>WHY CHOOSE BSBI?</h2>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+    
+                <div class="swiper-slide">
+                    <div class="card">
+                        <div class="icon"><img src="campus.svg" alt="vibrant"></div>
+                        <h3>Vibrant Campus Life</h3>
+                        <p>Engage in student clubs, events, and activities for a holistic student experience</p>
+                    </div>
+                </div>
+    
+                <div class="swiper-slide">
+                    <div class="card">
+                        <div class="icon"><img src="visa.svg" alt=""></div>
+                        <h3>Visa Processing</h3>
+                        <p>Obtain a study visa quickly and easily at our designated campus</p>
+                    </div>
+                </div>
+    
+                <div class="swiper-slide">
+                    <div class="card">
+                        <div class="icon"><img src="multi.svg" alt=""></div>
+                        <h3>Multicultural Environment</h3>
+                        <p>Immerse in an international student body, fostering cross-cultural interactions and networking</p>
+                    </div>
+                </div>
+    
+                <div class="swiper-slide">
+                    <div class="card">
+                        <div class="icon"><img src="support.svg" alt=""></div>
+                        <h3>Student Support</h3>
+                        <p>Access dedicated resources to help you succeed academically and socially</p>
+                    </div>
+                </div>
+    
+            </div>
+    
+            <!-- Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+    
+
+    
+    <section class="section-container" aria-label="Our Campus Section with slideshow images">
+        <div class="slideshow-container" aria-live="polite" aria-atomic="true" aria-roledescription="carousel">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5880a0e6-354a-42c4-ba62-8265ed28d70c.png" alt="Front view of the historical BSBI main campus building with blue sky background" class="active" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/559775f8-6cbb-46cc-ad2d-602592aa6c16.png" alt="Interior view of the modern auditorium hall in BSBI campus with seating and stage" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e520bb1-6e81-4d7e-80c4-fcd350446889.png" alt="Cafeteria area in the BSBI campus with students sitting and chatting" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/38dc6163-e694-46aa-92f4-2ce4db950a28.png" alt="Rooftop terrace of the BSBI campus with tables and panoramic city views" />
+          <div class="dot-container" role="tablist" aria-label="Image slideshow navigation dots">
+            <span class="dot active" role="tab" tabindex="0" aria-selected="true" aria-controls="slide1" data-index="0"></span>
+            <span class="dot" role="tab" tabindex="-1" aria-selected="false" aria-controls="slide2" data-index="1"></span>
+            <span class="dot" role="tab" tabindex="-1" aria-selected="false" aria-controls="slide3" data-index="2"></span>
+            <span class="dot" role="tab" tabindex="-1" aria-selected="false" aria-controls="slide4" data-index="3"></span>
+          </div>
+        </div>
+        
+
+        <div class="text-content" id="our-nav">
+          <h2>Our Campus</h2>
+          <p>
+           <b>The new BSBI main campus is situated in the historical building of Alte Post. This building boasts a modern interior, with 17,000 square meters of space.
+            The Neukölln district is a melting pot of cultures. With BSBI in the area, we will bring an even truer sense of diversity to this urban neighbourhood.</b>
+          </p>
+          <p>
+            <b>Apart from accessibility, the new campus offers modern equipment and facilities including an audio and visual studio, IT laboratory, cafeteria, lounge areas,
+            rooftop access and terraces.</b>    
+          </p>
+      
+        </div>
+      </section>
+      <section class="testimonial-section" id="testimonials-nav">
+        <h2>STUDENT TESTIMONIALS</h2>
+        <p>
+          Hear from our international student community. Choose to study with over 112+ nationalities in the world's most innovative country, 
+          Germany (Bloomberg 2024 Innovation Index).
+        </p>
+        <div class="testimonial-cards">
+            <div class="card">
+              <iframe 
+                src="https://www.youtube.com/embed/MAtnVYr3at0" 
+                title="BSBI Winter Graduation 2025 | Graduate Testimonials" 
+                allowfullscreen>
+              </iframe>
+              <h3>BSBI Winter Graduation 2025 | Graduate Testimonials</h3>
+            </div>
+          
+            <div class="card">
+              <iframe 
+                src="https://www.youtube.com/embed/j-nEEGLNa6Q" 
+                title="Mayank Sharma from India - Postgraduate Student" 
+                allowfullscreen>
+              </iframe>
+              <h3>Mayank Sharma from India</h3>
+              <p>Postgraduate Student</p>
+            </div>
+          </div>
+          </section>
+          <!-- Special Offers Section -->
+<section class="special-offers">
+    <h2>Special Offers</h2>
+    <p>
+      Explore the offers on our postgraduate programmes and the terms and conditions
+      <a href="#">here</a>.
+    </p>
+  </section>
+  
+  <footer class="site-footer">
+    <div class="footer-logo">
+      <img src="assests/BSBI-Logo-Blue-1.webp" alt="Berlin School of Business & Innovation Logo">
+    </div>
+    <div class="footer-text">
+      <p>
+        Berlin School of Business and Innovation GmbH<br>
+        Alte Post · Karl-Marx-Straße 97-99<br>
+        12043 Berlin Germany
+      </p>
+    </div>
+    <div class="footer-links">
+      <a href="#" style="text-decoration: none;">Privacy Policy</a> | 
+      <a href="#"style="text-decoration: none;">Legal Disclosure</a> | 
+      <a href="admin-Login.html" class="admin-link" style="text-decoration: none;">Admin Panel</a>
+    </div>
+  </footer>
+  
+          
+    
+   
+    <script>
+       let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+}
+
+// Optional: Auto slide
+setInterval(function(){ plusSlides(1); }, 2000);
+
+          
+            function setupSlideshow(slideshow) {
+              const images = slideshow.querySelectorAll('img');
+              const dots = slideshow.querySelectorAll('.dot');
+              let currentIndex = 0;
+              let intervalId;
+        
+              function showSlide(index) {
+                images.forEach((img, i) => {
+                  img.classList.toggle('active', i === index);
+                });
+                dots.forEach((dot, i) => {
+                  dot.classList.toggle('active', i === index);
+                  dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                  dot.tabIndex = i === index ? 0 : -1;
+                });
+                currentIndex = index;
+              }
+        
+              function nextSlide() {
+                let newIndex = (currentIndex + 1) % images.length;
+                showSlide(newIndex);
+              }
+        
+              dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                  clearInterval(intervalId);
+                  const index = Number(dot.getAttribute('data-index'));
+                  showSlide(index);
+                  intervalId = setInterval(nextSlide, 4000);
+                });
+                dot.addEventListener('keydown', (e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dot.click();
+                  }
+                });
+              });
+        
+              intervalId = setInterval(nextSlide, 4000);
+              showSlide(0);
+            }
+
+            
+            <!-- Internal Script -->
+
+    document.addEventListener("DOMContentLoaded", function() {
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        breakpoints: {
+            1024: { slidesPerView: 3 },
+            768: { slidesPerView: 2 },
+            0: { slidesPerView: 1 }
+        }
+    });
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<!-- Firebase Realtime Database -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script src="link.js"></script>
+
+    
+
+  </script>
+</body>
+</html>

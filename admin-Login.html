@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Verification</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f8f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .login-box {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        width: 300px;
+        text-align: center;
+    }
+    .login-box h2 {
+        margin-bottom: 20px;
+        color: #2e7d32;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #2e7d32;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    button:hover {
+        background: #256428;
+    }
+    .error {
+        color: red;
+        margin-top: 10px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>Admin Login</h2>
+    <input type="email" id="adminEmail" placeholder="Admin Email" required>
+    <input type="password" id="adminPassword" placeholder="Password" required>
+    <button onclick="verifyAdmin()">Login</button>
+    <div class="error" id="errorMsg">Invalid credentials!</div>
+</div>
+
+<script>
+    // Hardcoded allowed admin email and password
+    const allowedAdmin = {
+        email: "admin123@gmail.com",   // change this to your real admin email
+        password: "admin123"          // change this to your secure password
+    };
+
+    function verifyAdmin() {
+        const email = document.getElementById("adminEmail").value.trim();
+        const password = document.getElementById("adminPassword").value.trim();
+        const errorMsg = document.getElementById("errorMsg");
+
+        if (email === allowedAdmin.email && password === allowedAdmin.password) {
+            // Save admin session
+            sessionStorage.setItem("isAdmin", "true");
+            // Redirect to admin panel
+            window.location.href = "admin.html";
+        } else {
+            errorMsg.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
